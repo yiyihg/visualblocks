@@ -16,5 +16,5 @@ jobs:
           git config --local user.name "GitHub Action"
           git status
           git add .
-          git commit .
+          git commit -m "Auto file creation"
           git push
