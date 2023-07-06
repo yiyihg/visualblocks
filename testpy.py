@@ -11,16 +11,19 @@ def main():
         json.dump(data, json_file, ensure_ascii=False)
 
 def check_dir(root_path):
-    for path in os.listdir(root_path):
+    for name in os.listdir(root_path):
+        if name == 'README.md':
+            continue
+
+        path = osp.join(root_path, name)
         if osp.isdir(path):
             check_dir(path)
             continue
-        # Not a directory, so this is a file
-        if path == 'README.md':
-            continue
 
+        # Not a directory and not README file
+        # So add this to the data
         data.append({
-            'name': root_path+path
+            'name': path
         })
 
 main()
