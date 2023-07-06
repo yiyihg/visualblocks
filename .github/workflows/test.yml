@@ -12,4 +12,12 @@ jobs:
       - run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-      - run: git diff-tree --no-commit-id --name-only -r ${{ github.sha }}
+      # - run: git diff-tree --no-commit-id --name-only -r ${{ github.sha }}
+
+      - name: get changed files
+        id: getfile
+        run: |
+          echo "::set-output name=files::$(git diff-tree --no-commit-id --name-only -r ${{ github.sha }} | xargs)"
+      - name: echo output
+        run: |
+          echo ${{ steps.getfile.outputs.files }}
