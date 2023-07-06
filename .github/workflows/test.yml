@@ -1,7 +1,7 @@
 name: Testing Here
 
 on:
-  push: {branches: testing}
+  push: {branches: testFilesFromPush}
 
 jobs:
   test:
