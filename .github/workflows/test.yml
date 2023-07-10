@@ -20,6 +20,9 @@ jobs:
         id: getfile
         run: |
           echo "::set-output name=files::$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | xargs)"
+        # For status (deleted, modified, added)
+        # echo "::set-output name=files::$(git diff --name-status ${{ github.event.before }} ${{ github.sha }} | xargs)"
+        # For one commit diff
         # echo "::set-output name=files::$(git diff-tree --no-commit-id --name-only -r ${{ github.sha }} | xargs)"
           
       - name: run python with output
