@@ -1,7 +1,7 @@
 name: Testing Here
 
 on:
-  push: {branches: testFilesFromPush}
+  push: {branches: testFilesFromPush, paths: pipelines/**}
 
 jobs:
   test:
