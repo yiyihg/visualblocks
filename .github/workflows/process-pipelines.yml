@@ -4,15 +4,15 @@ on:
   push: {branches: pipelines-processing, paths: pipelines/**}
 
 jobs:
-  test:
+  pipeprocess:
     runs-on: ubuntu-latest
     name: Run script
     steps:
       - uses: actions/checkout@v3
       
-      name: Run python script 
+      - name: Run python script 
       - run: python .github/workflows/process.py
-      name: Push new file
+      - name: Push new file
       - run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
