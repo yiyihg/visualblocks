@@ -1,20 +1,22 @@
-# name: Process Pipelines
+name: Process Pipelines
 
-# on:
-#   push: {branches: main}
+on:
+  push: {branches: pipelines-processing, paths: pipelines/**}
 
-# jobs:
-#   test:
-#     runs-on: ubuntu-latest
-#     name: Run script
-#     steps:
-#       - uses: actions/checkout@v3
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    name: Run script
+    steps:
+      - uses: actions/checkout@v3
       
-#       - run: python testpy.py
-#       - run: |
-#           git config --local user.email "action@github.com"
-#           git config --local user.name "GitHub Action"
-#           git status
-#           git add .
-#           git commit -m "Auto file creation"
-#           git push
+      name: Run python script 
+      - run: python .github/workflows/process.py
+      name: Push new file
+      - run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git status
+          git add .
+          git commit -m "Update pipelines_index.json"
+          git push
