@@ -8,13 +8,13 @@ jobs:
     runs-on: ubuntu-latest
     name: Run script
     steps:
-      - name: Create new branch
+      name: Create new branch
       - uses: actions/checkout@v3
       - run: git branch generate-file-branch-${{ github.run_id }}-${{ github.run_attempt }}
       
-      - name: Checkout new branch and run script
+      name: Checkout new branch and run script
       - uses: actions/checkout@v3
-      - with:
+        with:
           ref: generate-file-branch-${{ github.run_id }}-${{ github.run_attempt }}
       - run: python .github/workflows/process.py
       - run: |
