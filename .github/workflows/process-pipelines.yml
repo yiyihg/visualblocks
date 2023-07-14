@@ -9,15 +9,15 @@ jobs:
     name: Run script
     steps:
       - name: Create new branch
-        uses: actions/checkout@v3
-        run: git branch generate-file-branch-${{ github.run_id }}-${{ github.run_attempt }}
+      - uses: actions/checkout@v3
+      - run: git branch generate-file-branch-${{ github.run_id }}-${{ github.run_attempt }}
       
       - name: Checkout new branch and run script
-        uses: actions/checkout@v3
-        with:
+      - uses: actions/checkout@v3
+      - with:
           ref: generate-file-branch-${{ github.run_id }}-${{ github.run_attempt }}
-        run: python .github/workflows/process.py
-        run: |
+      - run: python .github/workflows/process.py
+      - run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git status
