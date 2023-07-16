@@ -29,7 +29,7 @@ pull request by following
 Make sure to add your pipeline to the corresponding subfolder within the
 pipeline folder (i.e. audio, vision, multi-modal, etc.). We strongly recommend
 contributors to also upload a GIF or JPG screenshot for your pipeline (width:
-320px) to be featured in this guide.
+320px) to be featured in this guide. small change
 
 ### Step 4: Describing Your Pipeline (Optional)
 
