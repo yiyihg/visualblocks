@@ -27,7 +27,7 @@ jobs:
           git add .
           git commit -m "Update pipelines_index.json"
           git push
-          gh pr create -H main -H generate-file-branch-${{ github.run_id }}-${{ github.run_attempt }} --title 'Update pipelines_index.json' --body 'Update pipelines index'
+          gh pr create -H main -H --title 'Update pipelines_index.json' --body 'Update pipelines index'
       # - run: |
       #     git branch generate-file-branch-${{ github.run_id }}-${{ github.run_attempt }}
       #     git push --set-upstream origin generate-file-branch-${{ github.run_id }}-${{ github.run_attempt }}
