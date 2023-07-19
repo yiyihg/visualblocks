@@ -1,11 +1,7 @@
 name: Process Pipelines
 
 on:
-  push: {branches: test-pr-auto}
-
-
-# env:
-#   GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  push: {branches: main}
 
 jobs:
   pipeprocess:
@@ -14,26 +10,23 @@ jobs:
       - name: Create new branch and run script
         uses: actions/checkout@v3
         with:
-          ref: test-pr-auto
+          ref: main
       - run: |
           git branch generate-file-branch-${{ github.run_id }}-${{ github.run_attempt }}
           git push --set-upstream origin generate-file-branch-${{ github.run_id }}-${{ github.run_attempt }}
           git checkout generate-file-branch-${{ github.run_id }}-${{ github.run_attempt }}
           python .github/workflows/process.py
-      #     if [[ "$(git diff --exit-code ./pipelines/pipelines_index.json)" =~ 'diff' ]]; then echo "IS_VALID=true" >> $GITHUB_ENV; else echo "IS_VALID=false" >> $GITHUB_ENV ;fi
-      # - if: ${{ env.IS_VALID == 'true' }}
-      - run: |
+          if [[ "$(git diff --exit-code ./pipelines/pipelines_index.json)" =~ 'diff' ]]; then echo "IS_VALID=true" >> $GITHUB_ENV; else echo "IS_VALID=false" >> $GITHUB_ENV ;fi
+      - if: ${{ env.IS_VALID == 'true' }}
+        run: |
           git config --global user.email "vb-bot@google.com"
           git config --global user.name "vb-bot"
           git add .
           git commit -m "Update pipelines_index.json"
           git push
-      - run: |
-          echo ${{ secrets.GITHUB_TOKEN }} | gh auth login --with-token
-          gh auth token
           gh pr create -H main -H generate-file-branch-${{ github.run_id }}-${{ github.run_attempt }} --title 'Update pipelines_index.json' --body 'Update pipelines index'
-      # env:
-      #   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       # - run: |
       #     git branch generate-file-branch-${{ github.run_id }}-${{ github.run_attempt }}
       #     git push --set-upstream origin generate-file-branch-${{ github.run_id }}-${{ github.run_attempt }}
