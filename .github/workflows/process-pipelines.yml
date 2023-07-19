@@ -29,8 +29,6 @@ jobs:
           git commit -m "Update pipelines_index.json"
           git push
       - run: |
-          gh auth token
-      - run: |
           echo ${{ secrets.GITHUB_TOKEN }} | gh auth login --with-token
           gh auth token
           gh auth token -h
