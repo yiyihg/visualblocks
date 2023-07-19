@@ -22,7 +22,7 @@ jobs:
           python .github/workflows/process.py
       #     if [[ "$(git diff --exit-code ./pipelines/pipelines_index.json)" =~ 'diff' ]]; then echo "IS_VALID=true" >> $GITHUB_ENV; else echo "IS_VALID=false" >> $GITHUB_ENV ;fi
       # - if: ${{ env.IS_VALID == 'true' }}
-        run: |
+      - run: |
           git config --global user.email "vb-bot@google.com"
           git config --global user.name "vb-bot"
           git add .
