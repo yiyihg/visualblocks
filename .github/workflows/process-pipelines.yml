@@ -31,7 +31,6 @@ jobs:
       - run: |
           echo ${{ secrets.GITHUB_TOKEN }} | gh auth login --with-token
           gh auth token
-          gh auth token -h
           gh pr create -H main -H generate-file-branch-${{ github.run_id }}-${{ github.run_attempt }} --title 'Update pipelines_index.json' --body 'Update pipelines index'
       # env:
       #   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
