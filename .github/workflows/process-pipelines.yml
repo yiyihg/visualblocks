@@ -42,11 +42,6 @@ jobs:
       #     git push
       #     gh pr create -H main -H generate-file-branch-${{ github.run_id }}-${{ github.run_attempt }} --title 'Update pipelines_index.json' --body 'Update pipelines index'
 
-      # - name: Run script
-      #   uses: actions/checkout@v3
-      #   with:
-      #     ref: generate-file-branch-${{ github.run_id }}-${{ github.run_attempt }}
-      # - run: python .github/workflows/process.py
     
       # - name: Push and pull request
       #   run: |
