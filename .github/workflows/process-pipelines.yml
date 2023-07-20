@@ -10,8 +10,8 @@ jobs:
       - name: Create new branch and run script
         uses: actions/checkout@v3
         with:
-          ref: test-pr-auto
-          token: ${{ secrets.GITHUB_TOKEN }}
+          ref: main
+          # token: ${{ secrets.BOT_TOKEN }}
       - run: |
           git branch generate-file-branch-${{ github.run_id }}-${{ github.run_attempt }}
           git push --set-upstream origin generate-file-branch-${{ github.run_id }}-${{ github.run_attempt }}
@@ -27,7 +27,7 @@ jobs:
           git push
           gh pr create -H main -H generate-file-branch-${{ github.run_id }}-${{ github.run_attempt }} --title 'Update pipelines_index.json' --body 'Update pipelines index'
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.BOT_TOKEN }}
       # - run: |
       #     git branch generate-file-branch-${{ github.run_id }}-${{ github.run_attempt }}
       #     git push --set-upstream origin generate-file-branch-${{ github.run_id }}-${{ github.run_attempt }}
